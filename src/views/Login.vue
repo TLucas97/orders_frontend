@@ -50,11 +50,14 @@ export default {
   },
   methods: {
     login() {
-      if (this.user !== "admin" && this.password !== "admin") return;
-      this.$toast.success("Successfully logged in!");
-      this.$store.commit("login");
-      this.$store.commit("setUserName", this.user);
-      this.$router.push("/home");
+      if (this.user === "admin" && this.password === "admin") {
+        this.$toast.success("Successfully logged in!");
+        this.$store.commit("login");
+        this.$store.commit("setUserName", this.user);
+        this.$router.push("/home");
+      } else {
+        this.$toast.error("Invalid username or password!");
+      }
     },
   },
 };
