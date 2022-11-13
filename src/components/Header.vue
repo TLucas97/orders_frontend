@@ -1,7 +1,9 @@
 <template>
   <div class="header d-flex align-center justify-space-between px-10">
     <div class="d-flex align-center">
-      <h2>OrdersProject</h2>
+      <router-link :to="!store.isLogged ? '/' : '/home'"
+        ><h2>OrdersProject</h2></router-link
+      >
       <div class="ml-5" v-if="store.isLogged">
         <router-link to="/home">Home</router-link>
         <router-link to="/tables">Tables</router-link>
@@ -10,7 +12,12 @@
     <div>
       <div v-if="store.isLogged">
         <router-link to="/user">
-          <v-icon>mdi-account</v-icon>
+          <v-icon
+            @mouseenter="accountHover = true"
+            @mouseleave="accountHover = false"
+            :color="!accountHover ? 'white' : ''"
+            >mdi-account</v-icon
+          >
           {{ store.userName }}</router-link
         >
       </div>
@@ -24,6 +31,7 @@ export default {
   data() {
     return {
       store: this.$store.state,
+      accountHover: false,
     };
   },
 };

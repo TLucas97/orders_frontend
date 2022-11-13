@@ -43,6 +43,8 @@ export default {
       password: "",
       store: this.$store.state,
       showPassword: false,
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoib2llbiJ9.4_ikUYh6LNUmH-ToYub6SfHBNSigkGjYD4ATRvkilfI",
     };
   },
   mounted() {
@@ -51,10 +53,10 @@ export default {
   methods: {
     login() {
       if (this.user === "admin" && this.password === "admin") {
-        this.$toast.success("Successfully logged in!");
         this.$store.commit("login");
-        this.$store.commit("setUserName", this.user);
+        this.$store.commit("setJWT", this.token);
         this.$router.push("/home");
+        this.$toast.success("Successfully logged in!");
       } else {
         this.$toast.error("Invalid username or password!");
       }

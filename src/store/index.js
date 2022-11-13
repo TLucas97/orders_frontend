@@ -7,7 +7,6 @@ export default new Vuex.Store({
   state: {
     isLogged: false,
     userJWT: "",
-    userName: "",
   },
   mutations: {
     login(state) {
@@ -18,9 +17,6 @@ export default new Vuex.Store({
     },
     setJWT(state, jwt) {
       state.userJWT = jwt;
-    },
-    setUserName(state, name) {
-      state.userName = name;
     },
   },
   actions: {},
