@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -47,14 +49,20 @@ export default {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoib2llbiJ9.4_ikUYh6LNUmH-ToYub6SfHBNSigkGjYD4ATRvkilfI",
     };
   },
-  mounted() {
+  async mounted() {
     if (this.store.isLogged) this.$router.push("/home");
   },
   methods: {
-    login() {
-      if (this.user === "admin" && this.password === "admin") {
+    async login() {
+      console.log("test");
+      const response = await axios.post("http://localhost:5000/api/login/", {
+        login: this.user,
+        password: this.password,
+      });
+      console.log(response);
+      if (response) {
         this.$store.commit("login");
-        this.$store.commit("setJWT", this.token);
+        this.$store.commit("setJWT", response);
         this.$router.push("/home");
         this.$toast.success("Successfully logged in!");
       } else {
